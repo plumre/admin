@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cahodental.admin.dao.ShopMapper">
+
+    <insert id="saveShop" parameterType="com.cahodental.admin.model.po.ShopPO">
+        INSERT INTO shop(
+        id,
+        name,
+        is_open,
+        opening_day,
+        phone,
+        email,
+        address,
+        create_time
+        ) VALUES (
+        #{id},#{name},#{isOpen},#{openingDay},#{phone},#{email},#{address},#{createTime}
+        )
+    </insert>
+
+    <update id="updateShop" parameterType="com.cahodental.admin.model.po.ShopPO">
+        UPDATE shop
+        SET
+        name = #{name},
+        is_open = #{isOpen},
+        opening_day = #{opendingDay},
+        phone = #{phone},
+        email = #{email},
+        address = #{address},
+        update_time =#{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <select id="listShops" resultType="java.util.HashMap">
+        SELECT
+        id as id,
+        name as name,
+        is_open as isOpen,
+        opening_day as opendingDay,
+        phone as phone,
+        email as email,
+        address as address,
+        create_time as createTime,
+        update_time as updateTime
+        FROM shop
+        ORDER BY id ASC
+    </select>
+
+    <select id="getShopById" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        SELECT
+        id as id,
+        name as name,
+        is_open as isOpen,
+        opening_day as opendingDay,
+        phone as phone,
+        email as email,
+        address as address,
+        create_time as createTime,
+        update_time as updateTime
+        from shop where id = #{id}
+    </select>
+
+</mapper>

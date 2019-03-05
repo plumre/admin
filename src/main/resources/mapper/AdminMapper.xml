@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cahodental.admin.dao.AdminMapper">
+
+    <insert id="saveAdmin" parameterType="com.cahodental.admin.model.po.AdminPO">
+        INSERT INTO admin(
+        id,
+        user_name,
+        password,
+        shop_id,
+        create_time
+        ) VALUES (
+        #{id},#{userName},#{password},#{shopId},#{createTime}
+        )
+    </insert>
+
+    <update id="updateAdmin" parameterType="com.cahodental.admin.model.po.AdminPO">
+        UPDATE admin
+        SET
+        user_name = #{userName},
+        password = #{password},
+        shop_id = #{shopId},
+        update_time =#{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <select id="listAdmins" resultType="java.util.HashMap">
+        SELECT
+        a.id AS id,
+        a.user_name AS userName,
+        <!--a.password AS password,-->
+        a.shop_id AS shopId,
+        s.name AS shopName,
+        FROM admin a
+        LEFT JOIN shop s ON s.id = a.shop_id
+        ORDER BY a.shop_id ASC
+    </select>
+
+    <select id="getAdminById" parameterType="java.lang.Long" resultType="java.util.HashMap">
+        SELECT
+        id as id,
+        user_name as userName,
+        password as password,
+        shop_id as shopId
+        from admin where id = #{id}
+    </select>
+
+    <select id="getAdminByPassword" resultType="java.util.HashMap">
+        select
+        id as id,
+        user_name as userName,
+        password as password,
+        shop_id as shopId
+        from admin where user_name = #{userName} and password = #{password}
+    </select>
+
+</mapper>
