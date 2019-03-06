@@ -1,7 +1,7 @@
 package com.cahodental.admin.dao;
 
 /*
- * Created by renhongjiang on 2019/3/5.
+ * Created by plumre on 2019/3/5.
  */
 
 import com.cahodental.admin.model.po.UserPO;
@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * 客户信息的DAO接口
  *
- * @author renhongjiang
+ * @author plumre
  * @version 1.0
  * @date 2019/3/5 14:38
  */
