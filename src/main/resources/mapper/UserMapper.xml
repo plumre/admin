@@ -15,7 +15,7 @@
         shop_id,
         create_time
         ) VALUES (
-        #{id},#{name},#{age},#{gender},#{phone},#{email},#{address},#{type},#{shopId},#{createTime}
+        #{id},#{name},#{age},#{gender},#{phone},#{email},#{address},#{type},#{shopId},now()
         )
     </insert>
 
@@ -30,7 +30,7 @@
         address = #{address},
         type = #{type},
         shop_id = #{shopId},
-        update_time =#{updateTime}
+        update_time = now()
         WHERE id = #{id}
     </update>
 

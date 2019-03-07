@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+<div th:replace="fragment/header :: header"></div>
+<h3 th:text="${userVO.name}">Good day!</h3>
+<form action="/user/saveUser" method="post" th:object="${userVO}">
+    <input type="hidden" name="id" th:value="${userVO.id}">
+    <input type="hidden" name="shopId" th:value="*{shopId}"><br>
+    姓名：<input type="text" name="name" th:value="*{name}"><br>
+    年龄：<input type="text" name="age" th:value="*{age}"><br>
+    性别：<input type="radio" name="gender" checked="checked" th:value="*{gender}">男
+    <input type="radio" name="gender" th:value="*{gender}">女
+    电话：<input type="number" name="phone" th:value="*{phone}"><br>
+    邮箱：<input type="text" name="email" th:value="*{email}"><br>
+    地址：<input type="text" name="address" th:value="*{address}"><br>
+    类型：<input type="text" name="address" th:value="*{address}"><br>
+</form>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.cahodental.admin.controller;
 
 import com.cahodental.admin.model.po.UserPO;
+import com.cahodental.admin.model.vo.UserVO;
 import com.cahodental.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +30,10 @@ public class UerController {
         return "/login.html";
     }
 
-    @RequestMapping(value = "/saveUser", method = RequestMethod.GET)
-    public String saveUser(UserPO userPO, Model model) {
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    public String saveUser(UserVO userVO, Model model) {
         System.out.println("UerController.save");
-        userService.saveUser(userPO);
+        userService.saveUser(userVO);
         System.out.println("model = " + model);
         model.addAttribute("msg","this message is from Model AddUser.");
         return "/login.html";

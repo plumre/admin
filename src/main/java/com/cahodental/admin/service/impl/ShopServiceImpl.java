@@ -4,10 +4,14 @@ package com.cahodental.admin.service.impl;
  * Created by plumre on 2019/3/5.
  */
 
+import com.cahodental.admin.dao.ShopMapper;
 import com.cahodental.admin.model.po.ShopPO;
 import com.cahodental.admin.service.ShopService;
+import com.cahodental.admin.util.IdGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,9 +24,18 @@ import java.util.Map;
 @Service
 public class ShopServiceImpl implements ShopService {
 
+    @Autowired
+    private ShopMapper shopMapper;
+    private IdGenerator idGenerator = new IdGenerator(1L, 1L);
+
+
     @Override
     public Map<String, Object> saveShop(ShopPO shopPO) {
-        return null;
+        Map<String, Object> dataMap = new HashMap<>(16);
+        shopPO.setId(idGenerator.nextId());
+        shopMapper.saveShop(shopPO);
+        dataMap.put("id", shopPO.getId());
+        return dataMap;
     }
 
     @Override
@@ -36,8 +49,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Map<String, Object> getShop(Long id) {
-        return null;
+    public Map<String, Object> getShopById(Long id) {
+        return shopMapper.getShopById(id);
     }
 
     @Override

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List Info</title>
+</head>
+<body>
+<div th:replace="fragment/header :: header"></div>
+<h3 th:text="${userVO.name}">Good day!</h3>
+<table border="1">
+    <thead>
+    <tr>
+        <td>编号</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>性别</td>
+        <td>电话</td>
+        <td>邮箱</td>
+        <td>地址</td>
+        <td>类型</td>
+        <td>创建时间</td>
+        <td>修改时间</td>
+        <td colspan="2">操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${userList.size()} eq 0">
+        <td colspan="11">当前没有用户信息呢，努力吧少年！</td>
+    </tr>
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.gender}"></td>
+        <td th:text="${user.phone}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.type}"></td>
+        <td th:text="${user.createTime}"></td>
+        <td th:text="${user.updateTime}">
+        <td th:action="user/getUser" th:text="编辑"></td>
+        <td th:action="user/deleteUser" th:text="删除"></td>
+    </tr>
+    </tbody>
+</table>
+<div: th:replace="~{fragment/footer :: footer}">..</div:>
+
+</body>
+</html>

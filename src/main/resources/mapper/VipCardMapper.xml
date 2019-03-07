@@ -5,10 +5,10 @@
     <insert id="saveVipCard" parameterType="com.cahodental.admin.model.po.VipCardPO">
         INSERT INTO vip_card(
         id,
-        balance
+        balance,
         create_time
         ) VALUES (
-        #{id},#{balance},#{createTime}
+        #{id},#{balance},now()
         )
     </insert>
 
@@ -16,7 +16,7 @@
         UPDATE vip_card
         SET
         balance = #{balance},
-        update_time =#{updateTime}
+        update_time = now()
         WHERE id = #{id}
     </update>
 

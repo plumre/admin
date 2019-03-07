@@ -47,7 +47,7 @@ public interface ShopService {
      * @param id 店铺id
      * @return 店铺信息
      */
-    Map<String, Object> getShop(Long id);
+    Map<String, Object> getShopById(Long id);
 
     /**
      * 列出所有店铺信息

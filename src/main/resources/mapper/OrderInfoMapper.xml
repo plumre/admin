@@ -14,7 +14,7 @@
         gift_detail,
         create_time
         ) VALUES (
-        #{id},#{userName},#{password},#{shopId},#{createTime}
+        #{id},#{userName},#{password},#{shopId},now()
         )
     </insert>
 
@@ -28,7 +28,7 @@
         referer = #{referer},
         have_gift = #{haveGift},
         gift_detail = #{giftDetail},
-        update_time =#{updateTime}
+        update_time =now()
         WHERE id = #{id}
     </update>
 

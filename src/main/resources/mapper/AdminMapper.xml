@@ -10,7 +10,7 @@
         shop_id,
         create_time
         ) VALUES (
-        #{id},#{userName},#{password},#{shopId},#{createTime}
+        #{id},#{userName},#{password},#{shopId},now()
         )
     </insert>
 
@@ -20,7 +20,7 @@
         user_name = #{userName},
         password = #{password},
         shop_id = #{shopId},
-        update_time =#{updateTime}
+        update_time =now()
         WHERE id = #{id}
     </update>
 
@@ -31,6 +31,8 @@
         <!--a.password AS password,-->
         a.shop_id AS shopId,
         s.name AS shopName,
+        a.create_time as createTime,
+        a.update_time as updateTime
         FROM admin a
         LEFT JOIN shop s ON s.id = a.shop_id
         ORDER BY a.shop_id ASC
@@ -38,20 +40,24 @@
 
     <select id="getAdminById" parameterType="java.lang.Long" resultType="java.util.HashMap">
         SELECT
-        id as id,
-        user_name as userName,
-        password as password,
-        shop_id as shopId
-        from admin where id = #{id}
+        a.id as id,
+        a.user_name as userName,
+        a.password as password,
+        a.shop_id as shopId,
+        s.name as shopName
+        left join shop s on s.id = a.shop_id
+        from admin a where a.id = #{id}
     </select>
 
     <select id="getAdminByPassword" resultType="java.util.HashMap">
         select
-        id as id,
-        user_name as userName,
-        password as password,
-        shop_id as shopId
-        from admin where user_name = #{userName} and password = #{password}
+        a.id as id,
+        a.user_name as userName,
+        a.password as password,
+        a.shop_id as shopId,
+        s.shop_name as shopName
+        left join shop s on s.id = a.shop_id
+        from admin a where a.user_name = #{userName}
     </select>
 
 </mapper>
