@@ -52,8 +52,11 @@ public interface ShopService {
     /**
      * 列出所有店铺信息
      *
+     * @param isPage 是否分页
+     * @param pageNum 页码
+     * @param pageSize 每页显示的记录数
      * @return 店铺信息集合
      */
-    Map<String, Object> listShops();
+    Map<String, Object> listShops(Boolean isPage, Integer pageNum, Integer pageSize);
 
 }

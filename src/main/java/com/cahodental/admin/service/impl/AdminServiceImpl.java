@@ -8,9 +8,11 @@ import com.cahodental.admin.dao.AdminMapper;
 import com.cahodental.admin.model.po.AdminPO;
 import com.cahodental.admin.service.AdminService;
 import com.cahodental.admin.util.IdGenerator;
+import com.cahodental.admin.util.Md5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +40,7 @@ public class AdminServiceImpl implements AdminService {
     public Map<String, Object> saveAdmin(AdminPO adminPO) {
         Map<String, Object> dataMap = new HashMap<>(16);
         adminPO.setId(idGenerator.nextId());
+        adminPO.setPassword(Md5Utils.getPassword(adminPO.getPassword()));
         adminMapper.saveAdmin(adminPO);
         dataMap.put("id", adminPO.getId());
         return dataMap;

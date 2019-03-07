@@ -8,10 +8,13 @@ import com.cahodental.admin.dao.ShopMapper;
 import com.cahodental.admin.model.po.ShopPO;
 import com.cahodental.admin.service.ShopService;
 import com.cahodental.admin.util.IdGenerator;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,9 +27,13 @@ import java.util.Map;
 @Service
 public class ShopServiceImpl implements ShopService {
 
-    @Autowired
-    private ShopMapper shopMapper;
+    private final ShopMapper shopMapper;
     private IdGenerator idGenerator = new IdGenerator(1L, 1L);
+
+    @Autowired
+    public ShopServiceImpl(ShopMapper shopMapper) {
+        this.shopMapper = shopMapper;
+    }
 
 
     @Override
@@ -45,7 +52,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Map<String, Object> updateShop(ShopPO shopPO) {
-        return null;
+        Map<String, Object> dataMap = new HashMap<>(16);
+        shopMapper.updateShop(shopPO);
+        dataMap.put("id", shopPO.getId());
+        return dataMap;
     }
 
     @Override
@@ -54,7 +64,22 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Map<String, Object> listShops() {
-        return null;
+    public Map<String, Object> listShops(Boolean isPage, Integer pageNum, Integer pageSize) {
+        Map<String, Object> dataMap = new HashMap<>(16);
+        List<Map<String, Object>> listMap;
+        if (isPage) {
+            PageHelper.startPage(pageNum, pageSize);
+            listMap = shopMapper.listShops();
+            Page<Map<String, Object>> list = (Page<Map<String, Object>>) listMap;
+            dataMap.put("list", list);
+            dataMap.put("total", list.getTotal());
+            dataMap.put("pageNum", list.getPageNum());
+            return dataMap;
+        } else {
+            listMap = shopMapper.listShops();
+            dataMap.put("list", listMap);
+            return dataMap;
+        }
+
     }
 }
