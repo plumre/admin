@@ -1,7 +1,6 @@
 package com.cahodental.admin.controller;
 
 import com.cahodental.admin.model.po.AdminPO;
-import com.cahodental.admin.model.vo.UserVO;
 import com.cahodental.admin.service.AdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

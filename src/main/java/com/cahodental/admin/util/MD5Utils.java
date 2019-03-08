@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-public class Md5Utils {
+public class MD5Utils {
     /**
      * 获取MD5加密
      *
