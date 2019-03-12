@@ -6,6 +6,7 @@ package com.cahodental.admin.service;
 
 import com.cahodental.admin.model.po.OrderInfoPO;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -39,7 +40,7 @@ public interface OrderService {
      * @param id    订单id
      * @param isPay 支付状态
      */
-    Map<String, Object> updateOrderStatus(Long id, Integer isPay);
+    Map<String, Object> updateOrderStatus(Long id, Boolean isPay, Long userId, BigDecimal vipCardBalance, Long referer, BigDecimal bonus);
 
     /**
      * 根据id获取订单信息，适用于订单编辑处按钮、查看订单按钮

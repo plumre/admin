@@ -11,6 +11,8 @@ import com.cahodental.admin.model.po.VipCardPO;
 import com.cahodental.admin.model.vo.UserVO;
 import com.cahodental.admin.service.UserService;
 import com.cahodental.admin.util.IdGenerator;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -99,21 +102,40 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Map<String, Object> getUserById(Long id) {
-        return null;
+        return userMapper.getUserById(id);
     }
 
     @Override
     public Map<String, Object> getUserByName(String name) {
-        return null;
+        Map<String, Object> dataMap = new HashMap<>(16);
+        List<Map<String, Object>> list = userMapper.getUserByName(name);
+        dataMap.put("list", list);
+        return dataMap;
     }
 
     @Override
-    public Map<String, Object> listUsersByShopId(Long shopId) {
-        return null;
+    public Map<String, Object> listUsersByShopId(Long shopId, Boolean isPage, Integer pageNum, Integer pageSize) {
+        Map<String, Object> dataMap = new HashMap<>(16);
+        if (isPage) {
+            PageHelper.startPage(pageNum, pageSize);
+        }
+        List<Map<String, Object>> listMap = userMapper.listUsersByShopId(shopId);
+        if (isPage) {
+            Page<Map<String, Object>> list = (Page<Map<String, Object>>) listMap;
+            dataMap.put("list", list);
+            dataMap.put("total", list.getTotal());
+            dataMap.put("pageNum", list.getPageNum());
+        } else {
+            dataMap.put("list", listMap);
+        }
+        return dataMap;
     }
 
     @Override
     public Map<String, Object> listUsers() {
-        return null;
+        Map<String, Object> dataMap = new HashMap<>(16);
+        List<Map<String, Object>> list = userMapper.listUsers();
+        dataMap.put("list", list);
+        return dataMap;
     }
 }

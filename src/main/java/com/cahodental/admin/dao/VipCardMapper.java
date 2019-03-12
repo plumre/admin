@@ -7,6 +7,8 @@ package com.cahodental.admin.dao;
 import com.cahodental.admin.model.po.VipCardPO;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+
 /**
  * 会员卡信息的DAO接口
  *
@@ -34,4 +36,10 @@ public interface VipCardMapper {
     void updateVipCard(VipCardPO vipCardPO);
 
 
+    /**
+     * 查询会员卡余额信息
+     * @param userId 客户id
+     * @return 余额
+     */
+    BigDecimal getBalance(Long userId);
 }

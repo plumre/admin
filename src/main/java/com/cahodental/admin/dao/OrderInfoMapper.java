@@ -48,7 +48,7 @@ public interface OrderInfoMapper {
      * @param id    订单id
      * @param isPay 支付状态
      */
-    void updateOrderStatus(@Param("id") Long id, @Param("isPay") Integer isPay);
+    void updateOrderStatus(@Param("id") Long id, @Param("isPay") Boolean isPay);
 
     /**
      * 根据id获取订单信息，适用于订单编辑处按钮、查看订单按钮

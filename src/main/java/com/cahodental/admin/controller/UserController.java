@@ -60,5 +60,30 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping(value = "/listUsers", method = RequestMethod.GET)
+    public Result listUsers(Long shopId, Boolean isPage, Integer pageNum, Integer pageSize) {
+        Result<Map<String, Object>> result = new Result<>();
+        result.setStatus(-1);
+        if (StringUtils.isEmpty(isPage)) {
+            result.setMessage("请检查参数isPage");
+            return result;
+        }
+        if (isPage) {
+            if ((pageNum < 1 || pageSize < 1)) {
+                result.setMessage("请检查参数pageNum或pageSize");
+                return result;
+            }
+        }
+        try {
+            Map<String, Object> resMap = userService.listUsersByShopId(shopId, isPage, pageNum, pageSize);
+            result.setData(resMap);
+            result.setStatus(1);
+        } catch (Exception e) {
+            result.setMessage(e.getMessage());
+            logger.error("UserController.getUser Exception", e);
+        }
+        return result;
+    }
+
 
 }

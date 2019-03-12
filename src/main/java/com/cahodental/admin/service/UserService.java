@@ -61,7 +61,7 @@ public interface UserService {
      * @param shopId 店铺id
      * @return 客户信息的集合
      */
-    Map<String, Object> listUsersByShopId(Long shopId);
+    Map<String, Object> listUsersByShopId(Long shopId, Boolean isPage, Integer pageNum, Integer pageSize);
 
     /**
      * 获取所有店铺的客户信息

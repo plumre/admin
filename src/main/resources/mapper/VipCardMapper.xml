@@ -20,4 +20,10 @@
         WHERE id = #{id}
     </update>
 
+    <select id="getBalance" resultType="java.math.BigDecimal" parameterType="java.lang.Long">
+        select balance
+        from vip_card
+        where id = #{userId}
+    </select>
+
 </mapper>
